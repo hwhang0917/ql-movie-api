@@ -39,6 +39,10 @@ export const tmdbTVApi = {
         append_to_response: "videos,credits",
       },
     }),
+  seasonDeatil: (tvId: number, seasonNumber: number) =>
+    api.get(`tv/${tvId}/season/${seasonNumber}`),
+  episodeDetail: (tvId: number, seasonNumber: number, episodeNumber: number) =>
+    api.get(`tv/${tvId}/season/${seasonNumber}/episode/${episodeNumber}`),
   search: (term: string) =>
     api.get("search/tv", {
       params: {

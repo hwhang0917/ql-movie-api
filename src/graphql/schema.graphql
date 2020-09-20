@@ -1,3 +1,69 @@
+# Actual contents are received with snake_case but replaced with 
+# camelCase in GraphQL schema
+
 type Movie {
+    id: Int!
+    imdbId: String
+    posterPath: String
+    backdropPath: String
+    title: String!
+    overview: String
+    releaseData: String!
+    runtime: Int
+    voteAverage: Float!
+    productionCompanies: [Company]
+}
+
+type Show {
+    id: Int!
+    posterPath: String!
+    backdropPath: String
+    firstAirDate: String!
+    lastAirDat: String!
+    homepage: String!
+    name: String!
+    numberOfEpisodes: Int!
+    numberOfSeasons: Int!
+    overview: String!
+    seasons: [Season]
+    voteAverage: Float!
+}
+
+type Season {
+    id: Int!
+    airDate: String!
+    name: String!
+    posterPath: String!
+    overview: String
+    seasonNumber: Int
+    episodes: [Episode]
+}
+
+type Episode {
+    id: Int!
+    airDate: String!
+    name: String!
+    episodeNumber: Int!
+    seasonNumber: Int!
+    voteAverage: Float!
+}
+
+type Company {
+    id: Int!
+    name: String!
+    logoPath: String
+    originCountry: String
+}
+
+type Video {
+    id: String!
+    iso: String!
+    key: String!
+    name: String!
+    site: String!
+    type: String!
+}
+
+type Query {
     
 }
