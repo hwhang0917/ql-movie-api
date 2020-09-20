@@ -1,0 +1,24 @@
+{
+  "name": "ql-movie-api",
+  "version": "1.0.0",
+  "description": "The Movie Databsde API wrapped with GraphQL",
+  "author": "Heesang Whang",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "graphql-cli": "^4.0.0",
+    "npm-run-all": "^4.1.5",
+    "ts-node": "^9.0.0",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "axios": "^0.20.0",
+    "dotenv": "^8.2.0",
+    "graphql-yoga": "^1.18.3"
+  },
+  "scripts": {
+    "start": "ts-node src/index.ts",
+    "dev": "npm-run-all --parallel start playground",
+    "playground": "graphql playground"
+  }
+}
