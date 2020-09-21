@@ -28,9 +28,9 @@ type Show {
 
 type Season {
   id: Int!
-  airDate: String!
+  air_date: String
   name: String!
-  poster_path: String!
+  poster_path: String
   overview: String
   season_number: Int
   episodes: [Episode]
@@ -38,7 +38,7 @@ type Season {
 
 type Episode {
   id: Int!
-  airDate: String!
+  air_date: String
   name: String!
   episode_number: Int!
   season_number: Int!
