@@ -1,3 +1,8 @@
+export interface Status {
+  loading: boolean;
+  error: string | null;
+}
+
 export interface Movie {
   id: number;
   imdb_id: string | null;
@@ -9,6 +14,7 @@ export interface Movie {
   runtime: number | null;
   vote_average: number;
   production_companies: Array<Company> | null;
+  videos: Array<Video> | null;
 }
 
 export interface Show {

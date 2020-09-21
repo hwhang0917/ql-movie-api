@@ -1,69 +1,69 @@
-# Actual contents are received with snake_case but replaced with 
-# camelCase in GraphQL schema
-
 type Movie {
-    id: Int!
-    imdbId: String
-    posterPath: String
-    backdropPath: String
-    title: String!
-    overview: String
-    releaseData: String!
-    runtime: Int
-    voteAverage: Float!
-    productionCompanies: [Company]
+  id: Int!
+  imdb_id: String
+  poster_path: String
+  backdrop_path: String
+  title: String!
+  overview: String
+  release_date: String!
+  runtime: Int
+  vote_average: Float!
+  production_companies: [Company]
 }
 
 type Show {
-    id: Int!
-    posterPath: String!
-    backdropPath: String
-    firstAirDate: String!
-    lastAirDat: String!
-    homepage: String!
-    name: String!
-    numberOfEpisodes: Int!
-    numberOfSeasons: Int!
-    overview: String!
-    seasons: [Season]
-    voteAverage: Float!
+  id: Int!
+  poster_path: String!
+  backdrop_path: String
+  first_air_date: String!
+  last_air_date: String!
+  homepage: String!
+  name: String!
+  number_of_episodes: Int!
+  number_of_seasons: Int!
+  overview: String!
+  seasons: [Season]
+  vote_average: Float!
 }
 
 type Season {
-    id: Int!
-    airDate: String!
-    name: String!
-    posterPath: String!
-    overview: String
-    seasonNumber: Int
-    episodes: [Episode]
+  id: Int!
+  airDate: String!
+  name: String!
+  poster_path: String!
+  overview: String
+  season_number: Int
+  episodes: [Episode]
 }
 
 type Episode {
-    id: Int!
-    airDate: String!
-    name: String!
-    episodeNumber: Int!
-    seasonNumber: Int!
-    voteAverage: Float!
+  id: Int!
+  airDate: String!
+  name: String!
+  episode_number: Int!
+  season_number: Int!
+  vote_average: Float!
 }
 
 type Company {
-    id: Int!
-    name: String!
-    logoPath: String
-    originCountry: String
+  id: Int!
+  name: String!
+  logo_path: String
+  origin_country: String
 }
 
 type Video {
-    id: String!
-    iso: String!
-    key: String!
-    name: String!
-    site: String!
-    type: String!
+  id: String!
+  iso: String!
+  key: String!
+  name: String!
+  site: String!
+  type: String!
 }
 
 type Query {
-    
+  nowPlaying: [Movie]!
+  upcoming: [Movie]!
+  popular: [Movie]!
+  movieDetail(id: Int!): Movie
 }
