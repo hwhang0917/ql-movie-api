@@ -17,7 +17,6 @@
     "graphql-yoga": "^1.18.3"
   },
   "scripts": {
-    "testdb": "ts-node src/db.ts",
     "start": "ts-node src/index.ts",
     "dev": "npm-run-all --parallel start playground",
     "playground": "graphql playground"
