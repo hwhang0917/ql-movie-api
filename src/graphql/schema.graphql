@@ -45,6 +45,33 @@ type Episode {
   vote_average: Float!
 }
 
+type Person {
+  id: Int!
+  name: String!
+  imdb_id: String
+  also_known_as: [String]
+  biography: String
+  profile_path: String
+  birthday: String
+  deathday: String
+  cast: [Cast]
+  crew: [Crew]
+}
+
+type Cast {
+  cast_id: Int!
+  character: String!
+  title: String!
+  poster_path: String
+}
+
+type Crew {
+  credit_id: Int!
+  department: String!
+  job: String!
+  poster_path: String
+}
+
 type Company {
   id: Int!
   name: String!
@@ -81,4 +108,8 @@ type Query {
     episodeNumber: Int!
   ): [Episode]
   searchShow(term: String!): [Show]
+
+  #   Person Queries
+  personDetail(id: Int!): Person
+  searchPerson(term: String!): [Person]
 }

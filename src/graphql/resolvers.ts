@@ -1,4 +1,4 @@
-import { movie, show } from "./api";
+import { movie, show, people } from "./api";
 
 const resolvers = {
   Query: {
@@ -27,6 +27,9 @@ const resolvers = {
       }: { showId: number; seasonNumber: number; episodeNumber: number }
     ) => show.episodeDetail(showId, seasonNumber, episodeNumber),
     searchShow: (_: null, { term }: { term: string }) => show.search(term),
+    //   Person Resolvers
+    personDetail: (_: null, { id }: { id: number }) => people.personDetail(id),
+    searchPerson: (_: null, { term }: { term: string }) => people.search(term),
   },
 };
 

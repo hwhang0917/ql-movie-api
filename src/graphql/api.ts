@@ -7,10 +7,8 @@ import {
   Show,
   Season,
   Episode,
-  Company,
   Person,
-  Cast,
-  Crew,
+  MovieCredits,
 } from "./datatypes";
 
 const api = axios.create({
@@ -223,18 +221,47 @@ export const show = {
   },
 };
 
+// People API
 export const people = {
-  personDetail: (id: number) =>
-    api.get(`person/${id}`, {
-      params: {
-        append_to_response: "movie_credits",
-      },
-    }),
-  search: (term: string) =>
-    api.get("search/person", {
-      params: {
-        // themoviedb API aitomatically URIencodes search term
-        query: term,
-      },
-    }),
+  personDetail: async (id: number) => {
+    apiStatus.loading = true;
+    let result: Person;
+    let movieCredits: MovieCredits;
+    try {
+      ({ data: result } = await api.get(`person/${id}`, {
+        params: {
+          append_to_response: "movie_credits",
+        },
+      }));
+
+      // Destruct appended movie_credits into cast and crew array
+      movieCredits = result.movie_credits;
+      delete result.movie_credits;
+      result = { ...result, ...movieCredits };
+    } catch (error) {
+      apiStatus.error = error;
+    } finally {
+      apiStatus.loading = false;
+      return result;
+    }
+  },
+  search: async (term: string) => {
+    apiStatus.loading = true;
+    let results: [Person];
+    try {
+      ({
+        data: { results },
+      } = await api.get("search/person", {
+        params: {
+          // themoviedb API aitomatically URIencodes search term
+          query: term,
+        },
+      }));
+    } catch (error) {
+      apiStatus.error = error;
+    } finally {
+      apiStatus.loading = false;
+      return results;
+    }
+  },
 };

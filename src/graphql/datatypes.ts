@@ -71,19 +71,31 @@ export interface Person {
   id: number;
   name: string;
   imdb_id: string | null;
+  also_knwon_as: Array<string>;
   biography: string | null;
   profile_path: string | null;
   birthday: string | null;
   deathday: string | null;
+  cast: Array<Cast> | null;
+  crew: Array<Crew> | null;
+  movie_credits: MovieCredits | null;
 }
 
-export interface Cast extends Person {
+export interface MovieCredits {
+  cast: Array<Cast> | null;
+  crew: Array<Crew> | null;
+}
+
+export interface Cast {
   cast_id: number;
   character: string;
+  title: string;
+  poster_path: string | null;
 }
 
-export interface Crew extends Person {
+export interface Crew {
   credit_id: string;
   department: string;
   job: string;
+  poster_path: string | null;
 }
