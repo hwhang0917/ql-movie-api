@@ -62,8 +62,23 @@ type Video {
 }
 
 type Query {
-  nowPlaying: [Movie]!
-  upcoming: [Movie]!
-  popular: [Movie]!
+  # Movie Queries
+  nowPlayingMovies: [Movie]!
+  upcomingMovies: [Movie]!
+  popularMovies: [Movie]!
   movieDetail(id: Int!): Movie
+  searchMovie(term: String!): [Movie]
+
+  #   TV Show Queries
+  topRatedShows: [Show]!
+  popularShows: [Show]!
+  airingTodayShows: [Show]!
+  showDetail(id: Int!): Show
+  seasonDetail(showId: Int!, seasonNumber: Int!): [Season]
+  episodeDetail(
+    showId: Int!
+    seasonNumber: Int!
+    episodeNumber: Int!
+  ): [Episode]
+  searchShow(term: String!): [Show]
 }
