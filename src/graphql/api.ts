@@ -185,13 +185,13 @@ export const show = {
   episodeDetail: async (
     showId: number,
     seasonNumber: number,
-    episodeNumber: number
+    episodeNumber: number,
   ) => {
     apiStatus.loading = true;
     let result: Episode;
     try {
       ({ data: result } = await api.get(
-        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`
+        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`,
       ));
     } catch (error) {
       apiStatus.error = error;
