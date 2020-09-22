@@ -31,7 +31,7 @@
     "dev:server": "cross-env NODE_ENV=development ts-node src/index.ts",
     "playground": "graphql playground",
     "dev": "npm-run-all --parallel dev:server playground",
-    "build": "cross-env NODE_ENV=production netlify-lambda build dist/**/*",
+    "build": "cross-env NODE_ENV=production netlify-lambda build src",
     "prebuild": "gulp"
   }
 }
