@@ -1,6 +1,7 @@
 require("dotenv").config();
 
 import axios from "axios";
+import { isKorean } from "../utils";
 import {
   Status,
   Movie,
@@ -185,13 +186,13 @@ export const show = {
   episodeDetail: async (
     showId: number,
     seasonNumber: number,
-    episodeNumber: number,
+    episodeNumber: number
   ) => {
     apiStatus.loading = true;
     let result: Episode;
     try {
       ({ data: result } = await api.get(
-        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`,
+        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`
       ));
     } catch (error) {
       apiStatus.error = error;
@@ -234,7 +235,13 @@ export const people = {
         },
       }));
 
-      // Destruct appended movie_credits into cast and crew array
+      // Filter korean name from also_known_as
+      const korKnownNames: Array<string> = result.also_known_as.filter(
+        (name: string) => isKorean(name)
+      );
+      result.also_known_as = korKnownNames;
+
+      // Destruct appended movie_credits into cast and crew objects
       movieCredits = result.movie_credits;
       delete result.movie_credits;
       result = { ...result, ...movieCredits };

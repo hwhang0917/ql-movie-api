@@ -71,7 +71,7 @@ export interface Person {
   id: number;
   name: string;
   imdb_id: string | null;
-  also_knwon_as: Array<string>;
+  also_known_as: Array<string>;
   biography: string | null;
   profile_path: string | null;
   birthday: string | null;
