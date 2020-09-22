@@ -8,7 +8,7 @@ const schema: string = path.resolve(__dirname, "graphql", "schema.graphql");
 if (process.env.NODE_ENV === "production") {
   // Serverless function for production
   const lambda = new GraphQLServerLambda({
-    typeDefs: schema,
+    typeDefs: "./graphql/schema.graphql",
     resolvers,
   });
   exports.handler = lambda.handler;
