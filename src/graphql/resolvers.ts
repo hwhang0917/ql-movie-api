@@ -1,7 +1,10 @@
-import { movie, show, people } from "./api";
+import { movie, show, people, configuration } from "./api";
 
 const resolvers = {
   Query: {
+    //   Configurations
+    configurations: () => configuration(),
+
     //   Movie Resolvers
     nowPlayingMovies: () => movie.nowPlaying(),
     upcomingMovies: () => movie.upcoming(),

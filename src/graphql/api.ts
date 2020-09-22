@@ -10,6 +10,7 @@ import {
   Episode,
   Person,
   MovieCredits,
+  Configuration,
 } from "./datatypes";
 
 const api = axios.create({
@@ -25,6 +26,19 @@ const api = axios.create({
 export const apiStatus: Status = {
   loading: false,
   error: null,
+};
+
+export const configuration = async () => {
+  apiStatus.loading = true;
+  let config: Configuration;
+  try {
+    ({ data: config } = await api.get("configuration"));
+  } catch (error) {
+    apiStatus.error = error;
+  } finally {
+    apiStatus.loading = false;
+    return config;
+  }
 };
 
 // Movie API
