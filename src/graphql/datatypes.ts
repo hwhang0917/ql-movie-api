@@ -5,15 +5,15 @@ export interface Status {
 
 export interface Configuration {
   images: {
-    base_url: string,
-    secure_base_url: string,
-    backdrop_sizes: Array<string>,
-    logo_sizes: Array<string>,
-    poster_sizes: Array<string>,
-    profile_sizes: Array<string>,
-    still_sizes: Array<string>
-  },
-  change_keys: Array<string>
+    base_url: string;
+    secure_base_url: string;
+    backdrop_sizes: Array<string>;
+    logo_sizes: Array<string>;
+    poster_sizes: Array<string>;
+    profile_sizes: Array<string>;
+    still_sizes: Array<string>;
+  };
+  change_keys: Array<string>;
 }
 
 export interface Movie {
@@ -27,7 +27,7 @@ export interface Movie {
   runtime: number | null;
   vote_average: number;
   production_companies: Array<Company> | null;
-  videos: Array<Video> | null;
+  videos: { results: Array<Video> };
 }
 
 export interface Show {
@@ -43,6 +43,7 @@ export interface Show {
   overview: string;
   seasons: Array<Season> | null;
   vote_average: number;
+  videos: { results: Array<Video> };
 }
 
 export interface Season {

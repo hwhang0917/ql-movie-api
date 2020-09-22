@@ -24,6 +24,7 @@ type Movie {
   runtime: Int
   vote_average: Float!
   production_companies: [Company]
+  videos: VideoResults
 }
 
 type Show {
@@ -39,6 +40,7 @@ type Show {
   overview: String
   seasons: [Season]
   vote_average: Float!
+  videos: VideoResults
 }
 
 type Season {
@@ -93,6 +95,10 @@ type Company {
   name: String!
   logo_path: String
   origin_country: String
+}
+
+type VideoResults {
+  results: [Video]
 }
 
 type Video {
