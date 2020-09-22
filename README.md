@@ -21,8 +21,25 @@
    yarn dev
    ```
 
+### Production Guide
+
+1. Install [gulp-cli](https://www.npmjs.com/package/gulp-cli) for production
+   ```sh
+   yarn global add gulp-cli
+   ```
+2. Run build script or start script
+
+   ```sh
+   yarn build
+
+   or
+
+   yarn start
+   ```
+
 ### Core dependencies for development
 
 - [GraphQL](https://graphql.org/)
 - [Typescript](https://www.typescriptlang.org/)
 - [Axios](https://github.com/axios/axios)
+- [Gulp](https://gulpjs.com/)
