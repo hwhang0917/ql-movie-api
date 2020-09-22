@@ -1,6 +1,7 @@
 # QL Movie Api
 
 ![](https://img.shields.io/github/license/hwhang0917/ql-movie-api)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/18cb7945-60ba-4f8f-ad86-8aca03ce88d8/deploy-status)](https://app.netlify.com/sites/festive-chandrasekhar-5f99b8/deploys)
 
 > [The Movie Database API](https://developers.themoviedb.org/) wrapped with GraphQL
 
