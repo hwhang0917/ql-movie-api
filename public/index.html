@@ -2,11 +2,84 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>GraphQL Yoga</title>
+    <link rel="stylesheet" href="https://unpkg.com/mvp.css" />
+    <link
+      rel="shortcut icon"
+      href="https://res.cloudinary.com/dgggcrkxq/image/upload/v1566691589/noticon/qznqorjaesrgayapt6fs.png"
+      type="image/x-icon"
+    />
+    <style>
+      /* Style override */
+      li {
+        display: flex;
+        align-items: center;
+      }
+      li img {
+        margin-right: 0.5em;
+        user-select: none;
+        width: 20px;
+      }
+    </style>
+    <title>Movie API GraphQL | RunFridge</title>
   </head>
 
   <body id="home">
-    <h1>Hello World</h1>
-    GraphQL API available under <a href="/graphql">/graphql</a>
+    <header>
+      <h1>GraphQL Movie API</h1>
+      <p>
+        This is a
+        <a href="https://www.themoviedb.org/documentation/api">
+          Movie Database (TMDB) API
+        </a>
+        wrapped with GraphQL.
+      </p>
+      <p>
+        <a href="https://github.com/hwhang0917/ql-movie-api">
+          <i>Github Repository</i>
+        </a>
+        <a href="/graphql"><b>Graph QL Playground →</b></a>
+      </p>
+    </header>
+    <main>
+      <article>
+        <h2>Technology stacks</h2>
+        <ul>
+          <li>
+            <img
+              src="https://res.cloudinary.com/dgggcrkxq/image/upload/v1566913457/noticon/eh4d0dnic4n1neth3fui.png"
+              alt="typescript-logo"
+            />
+            Typescript
+          </li>
+          <li>
+            <img
+              src="https://res.cloudinary.com/dgggcrkxq/image/upload/v1566691589/noticon/qznqorjaesrgayapt6fs.png"
+              alt="graphql-logo"
+            />
+            GraphQL
+          </li>
+          <li>
+            <img
+              src="https://res.cloudinary.com/dgggcrkxq/image/upload/v1566690679/noticon/m5ikmctz18t1mvxizllk.png"
+              alt="apollo-logo"
+            />
+            Apollo
+          </li>
+          <li>
+            <img
+              src="https://res.cloudinary.com/dgggcrkxq/image/upload/v1582700237/noticon/vo9gok2swrcu16qxt84f.png"
+              alt="gulp-logo"
+            />
+            Gulp
+          </li>
+        </ul>
+      </article>
+    </main>
+    <footer>
+      <hr />
+      <p>
+        <small>hwhang0917 &copy; 2020 GraphQL Movie API </small>
+      </p>
+    </footer>
   </body>
 </html>
