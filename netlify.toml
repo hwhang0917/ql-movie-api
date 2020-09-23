@@ -2,4 +2,3 @@
   Command = "yarn build"
   Functions = "functions"
   Publish = "public"
-  ignore = "git diff --quiet master README.md"

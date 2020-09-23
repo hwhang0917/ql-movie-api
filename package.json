@@ -26,8 +26,7 @@
     "apollo-server": "^2.18.0",
     "apollo-server-lambda": "^2.18.0",
     "axios": "^0.20.0",
-    "dotenv": "^8.2.0",
-    "graphql-yoga": "^1.18.3"
+    "dotenv": "^8.2.0"
   },
   "scripts": {
     "test": "jest",
