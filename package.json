@@ -17,6 +17,7 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "jest": "^26.4.2",
     "netlify-lambda": "^2.0.1",
+    "nodemon": "^2.0.4",
     "npm-run-all": "^4.1.5",
     "ts-node": "^9.0.0",
     "typescript": "^4.0.3"
@@ -30,7 +31,7 @@
   },
   "scripts": {
     "test": "jest",
-    "dev:server": "cross-env NODE_ENV=development ts-node src/index.ts",
+    "dev:server": "ts-node src/index.ts",
     "playground": "graphql playground",
     "dev": "npm-run-all --parallel dev:server playground",
     "build": "cross-env NODE_ENV=production netlify-lambda build src",
