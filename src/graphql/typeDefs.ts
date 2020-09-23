@@ -1,3 +1,6 @@
+import { gql } from "apollo-server-lambda";
+
+const typeDefs = gql`
 type Configurations {
   images: ImageConfigurations
   change_keys: [String]
@@ -138,3 +141,6 @@ type Query {
   personDetail(id: Int!): Person
   searchPerson(term: String!): [Person]
 }
+`;
+
+export default typeDefs;
