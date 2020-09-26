@@ -130,12 +130,14 @@ type Query {
   popularMovies: [Movie]!
   movieDetail(id: Int!): Movie
   searchMovie(term: String!): [Movie]
+  similarMovies(id: Int!): [Movie]
 
   #   TV Show Queries
   topRatedShows: [Show]!
   popularShows: [Show]!
   airingTodayShows: [Show]!
   showDetail(id: Int!): Show
+  similarShows(id: Int!): [Show]
   seasonDetail(showId: Int!, seasonNumber: Int!): Season
   episodeDetail(
     showId: Int!

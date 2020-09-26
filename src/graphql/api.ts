@@ -89,6 +89,7 @@ export const movie = {
     }
   },
   movieDetail: async (id: number) => {
+    // Get detail information about given movie ID
     apiStatus.loading = true;
     let result: Movie;
     try {
@@ -105,6 +106,7 @@ export const movie = {
     }
   },
   search: async (term: string) => {
+    // Search movies from given term
     apiStatus.loading = true;
     let results: [Movie];
     try {
@@ -123,11 +125,25 @@ export const movie = {
       return results;
     }
   },
+  similarMovies: async (id: number) => {
+    // Get similar movies from given movie ID
+    apiStatus.loading = true;
+    let results: [Movie];
+    try {
+      ({ data: { results } } = await api.get(`movie/${id}/similar`));
+    } catch (error) {
+      apiStatus.error = error;
+    } finally {
+      apiStatus.loading = false;
+      return results;
+    }
+  },
 };
 
 // TV Show API
 export const show = {
   topRated: async () => {
+    // Get top rated TV shows (평점이 높은 시리즈)
     apiStatus.loading = true;
     let results: [Show];
     try {
@@ -142,6 +158,7 @@ export const show = {
     }
   },
   popular: async () => {
+    // Get currently popular TV shows (현재 인기 시리즈)
     apiStatus.loading = true;
     let results: [Show];
     try {
@@ -156,6 +173,7 @@ export const show = {
     }
   },
   airingToday: async () => {
+    // Get TV shows airing today (오늘 상영하는 시리즈)
     apiStatus.loading = true;
     let results: [Show];
     try {
@@ -170,6 +188,7 @@ export const show = {
     }
   },
   showDetail: async (id: number) => {
+    // Get show detail from given show ID
     apiStatus.loading = true;
     let result: Show;
     try {
@@ -185,7 +204,21 @@ export const show = {
       return result;
     }
   },
+  similarShows: async (id: number) => {
+    // Get similar shows from given show ID
+    apiStatus.loading = true;
+    let results: [Show];
+    try {
+      ({ data: { results } } = await api.get(`tv/${id}/similar`));
+    } catch (error) {
+      apiStatus.error = error;
+    } finally {
+      apiStatus.loading = false;
+      return results;
+    }
+  },
   seasonDeatil: async (showId: number, seasonNumber: number) => {
+    // Get season detail of a given show ID and season number
     apiStatus.loading = true;
     let result: Season;
     try {
@@ -200,13 +233,14 @@ export const show = {
   episodeDetail: async (
     showId: number,
     seasonNumber: number,
-    episodeNumber: number
+    episodeNumber: number,
   ) => {
+    // Get episode detail of a given show ID, season number, and episode number
     apiStatus.loading = true;
     let result: Episode;
     try {
       ({ data: result } = await api.get(
-        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`
+        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`,
       ));
     } catch (error) {
       apiStatus.error = error;
@@ -216,6 +250,7 @@ export const show = {
     }
   },
   search: async (term: string) => {
+    // Search TV show from given term
     apiStatus.loading = true;
     let results: [Show];
     try {
@@ -239,6 +274,7 @@ export const show = {
 // People API
 export const people = {
   personDetail: async (id: number) => {
+    // Get detailed person information from gien person ID
     apiStatus.loading = true;
     let result: Person;
     let movieCredits: MovieCredits;
@@ -251,7 +287,7 @@ export const people = {
 
       // Filter korean name from also_known_as
       const korKnownNames: Array<string> = result.also_known_as.filter(
-        (name: string) => isKorean(name)
+        (name: string) => isKorean(name),
       );
       result.also_known_as = korKnownNames;
 
@@ -267,6 +303,7 @@ export const people = {
     }
   },
   search: async (term: string) => {
+    // Search person information from given term
     apiStatus.loading = true;
     let results: [Person];
     try {
