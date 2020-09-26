@@ -11,7 +11,7 @@ import {
   Person,
   MovieCredits,
   Configuration,
-} from "./datatypes";
+} from "../@types/datatypes";
 
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3/",
