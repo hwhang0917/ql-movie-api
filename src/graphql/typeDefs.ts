@@ -28,6 +28,7 @@ type Movie {
   vote_average: Float!
   production_companies: [Company]
   videos: VideoResults
+  genres: [Genres]
 }
 
 type Show {
@@ -44,6 +45,12 @@ type Show {
   seasons: [Season]
   vote_average: Float!
   videos: VideoResults
+  genres: [Genres]
+}
+
+type Genres {
+  id: Int!
+  name: String!
 }
 
 type Season {

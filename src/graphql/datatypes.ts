@@ -28,6 +28,7 @@ export interface Movie {
   vote_average: number;
   production_companies: Array<Company> | null;
   videos: { results: Array<Video> };
+  genres: Array<Genres>;
 }
 
 export interface Show {
@@ -44,6 +45,12 @@ export interface Show {
   seasons: Array<Season> | null;
   vote_average: number;
   videos: { results: Array<Video> };
+  genres: Array<Genres>;
+}
+
+export interface Genres {
+  id: number;
+  name: string;
 }
 
 export interface Season {
