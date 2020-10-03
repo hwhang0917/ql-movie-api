@@ -23,7 +23,7 @@ const typeDefs = gql`
     backdrop_path: String
     title: String!
     overview: String
-    release_date: String!
+    release_date: String
     runtime: Int
     vote_average: Float!
     production_companies: [Company]
