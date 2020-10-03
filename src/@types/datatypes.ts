@@ -35,8 +35,8 @@ export interface Show {
   id: number;
   poster_path: string;
   backdrop_path: string | null;
-  first_air_date: string;
-  last_air_date: string;
+  first_air_date: string | null;
+  last_air_date: string | null;
   homepage: string;
   name: string;
   number_of_episodes: number;
