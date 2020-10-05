@@ -29,6 +29,7 @@ export interface Movie {
   production_companies: Array<Company> | null;
   videos: { results: Array<Video> };
   genres: Array<Genres>;
+  credits: Credits;
 }
 
 export interface Show {
@@ -46,6 +47,26 @@ export interface Show {
   vote_average: number;
   videos: { results: Array<Video> };
   genres: Array<Genres>;
+  credits: Credits;
+}
+
+export interface Credits {
+  cast: Array<CreditCast>;
+  crew: Array<CreditCrew>;
+}
+
+export interface CreditCast {
+  id: number;
+  character: string;
+  name: string;
+  profile_path: string;
+}
+
+export interface CreditCrew {
+  id: number;
+  department: string;
+  name: string;
+  profile_path: string;
 }
 
 export interface Genres {
