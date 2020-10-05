@@ -29,6 +29,7 @@ const typeDefs = gql`
     production_companies: [Company]
     videos: VideoResults
     genres: [Genres]
+    credits: Credits
   }
 
   type Show {
@@ -46,6 +47,26 @@ const typeDefs = gql`
     vote_average: Float!
     videos: VideoResults
     genres: [Genres]
+    credits: Credits
+  }
+
+  type Credits {
+    cast: [CreditCast]
+    crew: [CreditCrew]
+  }
+
+  type CreditCast {
+    id: Int!
+    character: String
+    name: String
+    profile_path: String
+  }
+
+  type CreditCrew {
+    id: Int!
+    name: String
+    profile_path: String
+    department: String
   }
 
   type Genres {
@@ -82,19 +103,20 @@ const typeDefs = gql`
     profile_path: String
     birthday: String
     deathday: String
-    cast: [Cast]
-    crew: [Crew]
+    cast: [CastDetail]
+    crew: [CrewDetail]
   }
 
-  type Cast {
-    cast_id: Int!
-    character: String!
+  type CastDetail {
+    id: Int!
     title: String!
+    character: String!
     poster_path: String
   }
 
-  type Crew {
-    credit_id: Int!
+  type CrewDetail {
+    id: Int!
+    original_title: String!
     department: String!
     job: String!
     poster_path: String
