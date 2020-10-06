@@ -55,14 +55,14 @@ export interface Credits {
   crew: Array<CreditCrew>;
 }
 
-export interface CreditCast {
+export interface CreditCast extends Person {
   id: number;
   character: string;
   name: string;
   profile_path: string;
 }
 
-export interface CreditCrew {
+export interface CreditCrew extends Person {
   id: number;
   department: string;
   name: string;

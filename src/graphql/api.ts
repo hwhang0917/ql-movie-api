@@ -130,7 +130,9 @@ export const movie = {
     apiStatus.loading = true;
     let results: [Movie];
     try {
-      ({ data: { results } } = await api.get(`movie/${id}/similar`));
+      ({
+        data: { results },
+      } = await api.get(`movie/${id}/similar`));
     } catch (error) {
       apiStatus.error = error;
     } finally {
@@ -209,7 +211,9 @@ export const show = {
     apiStatus.loading = true;
     let results: [Show];
     try {
-      ({ data: { results } } = await api.get(`tv/${id}/similar`));
+      ({
+        data: { results },
+      } = await api.get(`tv/${id}/similar`));
     } catch (error) {
       apiStatus.error = error;
     } finally {
@@ -233,14 +237,14 @@ export const show = {
   episodeDetail: async (
     showId: number,
     seasonNumber: number,
-    episodeNumber: number,
+    episodeNumber: number
   ) => {
     // Get episode detail of a given show ID, season number, and episode number
     apiStatus.loading = true;
     let result: Episode;
     try {
       ({ data: result } = await api.get(
-        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`,
+        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`
       ));
     } catch (error) {
       apiStatus.error = error;
@@ -287,9 +291,14 @@ export const people = {
 
       // Filter korean name from also_known_as
       const korKnownNames: Array<string> = result.also_known_as.filter(
-        (name: string) => isKorean(name),
+        (name: string) => isKorean(name)
       );
       result.also_known_as = korKnownNames;
+
+      // If no korea bio, get english bio
+      if (!result.biography) {
+        result.biography = await getEnglighBio(id);
+      }
 
       // Destruct appended movie_credits into cast and crew objects
       movieCredits = result.movie_credits;
@@ -322,4 +331,22 @@ export const people = {
       return results;
     }
   },
+};
+
+const getEnglighBio = async (id: number) => {
+  // Get english biography of a person (if korean DNE)
+  apiStatus.loading = true;
+  let result: Person;
+  try {
+    ({ data: result } = await api.get(`person/${id}`, {
+      params: {
+        language: "en-US",
+      },
+    }));
+  } catch (error) {
+    apiStatus.error = error;
+  } finally {
+    apiStatus.loading = false;
+    return result.biography;
+  }
 };
