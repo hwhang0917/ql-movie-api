@@ -103,22 +103,29 @@ const typeDefs = gql`
     profile_path: String
     birthday: String
     deathday: String
+    movie_credits: PersonCredits
+    tv_credits: PersonCredits
+  }
+
+  type PersonCredits {
     cast: [CastDetail]
     crew: [CrewDetail]
   }
 
   type CastDetail {
     id: Int!
-    title: String!
-    character: String!
+    title: String
+    name: String
+    character: String
     poster_path: String
   }
 
   type CrewDetail {
     id: Int!
-    original_title: String!
-    department: String!
-    job: String!
+    original_title: String
+    original_name: String
+    department: String
+    job: String
     poster_path: String
   }
 

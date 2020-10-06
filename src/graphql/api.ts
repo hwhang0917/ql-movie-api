@@ -9,7 +9,6 @@ import {
   Season,
   Episode,
   Person,
-  MovieCredits,
   Configuration,
 } from "../@types/datatypes";
 
@@ -281,11 +280,10 @@ export const people = {
     // Get detailed person information from gien person ID
     apiStatus.loading = true;
     let result: Person;
-    let movieCredits: MovieCredits;
     try {
       ({ data: result } = await api.get(`person/${id}`, {
         params: {
-          append_to_response: "movie_credits",
+          append_to_response: "movie_credits,tv_credits",
         },
       }));
 
@@ -299,11 +297,6 @@ export const people = {
       if (!result.biography) {
         result.biography = await getEnglighBio(id);
       }
-
-      // Destruct appended movie_credits into cast and crew objects
-      movieCredits = result.movie_credits;
-      delete result.movie_credits;
-      result = { ...result, ...movieCredits };
     } catch (error) {
       apiStatus.error = error;
     } finally {
