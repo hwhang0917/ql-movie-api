@@ -89,6 +89,7 @@ const typeDefs = gql`
     show_id: Int!
     air_date: String
     name: String!
+    overview: String
     episode_number: Int
     season_number: Int
     vote_average: Float!
@@ -172,7 +173,7 @@ const typeDefs = gql`
       showId: Int!
       seasonNumber: Int!
       episodeNumber: Int!
-    ): [Episode]
+    ): Episode
     searchShow(term: String!): [Show]
 
     #   Person Queries

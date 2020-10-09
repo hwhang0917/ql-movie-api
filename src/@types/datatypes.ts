@@ -86,11 +86,12 @@ export interface Season {
 
 export interface Episode {
   id: number;
-  air_date: string;
-  name: string;
+  air_date?: string;
+  name?: string;
+  overview?: string;
   episode_number: number;
   season_number: number;
-  vote_average: number;
+  vote_average?: number;
 }
 
 export interface Company {
