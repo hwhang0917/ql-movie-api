@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import { Video } from 'src/common/entities/video.entity';
+import { Credits } from 'src/people/entities/credits.entity';
 import { Company } from './company.entity';
 
 type Status =
@@ -46,6 +47,9 @@ export class Movie extends CoreEntity {
   @Field((type) => Int, { nullable: true })
   budget?: number;
 
+  @Field((type) => Credits)
+  credits: Credits;
+
   @Field((type) => [Genre])
   genres: Genre[];
 
@@ -67,9 +71,7 @@ export class Movie extends CoreEntity {
   @Field((type) => Int, { nullable: true })
   popularity?: number;
 
-  @Field((type) => String, {
-    defaultValue: `https://via.placeholder.com/405x600?text=FILMBOOK`,
-  })
+  @Field((type) => String, { nullable: true })
   poster_path: string;
 
   @Field((type) => [Company])
@@ -96,8 +98,10 @@ export class Movie extends CoreEntity {
   @Field((type) => String, { nullable: true })
   tagline?: string;
 
-  @Field((type) => [Video])
-  video: Video[];
+  @Field((type) => ({
+    results: [Video],
+  }))
+  videos: { results: Video[] };
 
   @Field((type) => Int, { nullable: true })
   vote_average?: number;

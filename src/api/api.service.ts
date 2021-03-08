@@ -1,6 +1,6 @@
-import { HttpService, Injectable, NotFoundException } from '@nestjs/common';
-import { AxiosResponse } from 'axios';
+import { HttpService, Injectable } from '@nestjs/common';
 import { Movie } from 'src/movies/entities/movie.entity';
+import { Person } from 'src/people/entities/person.entity';
 import { Parameters } from './api.interface';
 
 @Injectable()
@@ -37,6 +37,8 @@ export class ApiService {
       await this.get<Movie[]>(`movie/${id}/similar`),
   };
 
+  shows = {};
+
   search = {
     movie: async (query: string): Promise<Movie[]> =>
       await this.get<Movie[]>('search/movie', { query }),
@@ -44,7 +46,7 @@ export class ApiService {
     // show: async (query: string): Promise<> =>
     //   await this.get('search/tv', { query }),
 
-    // person: async (query: string): Promise<> =>
-    //   await this.get('search/person', { query }),
+    person: async (query: string): Promise<Person> =>
+      await this.get<Person>('search/person', { query }),
   };
 }

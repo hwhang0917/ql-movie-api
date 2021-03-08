@@ -7,7 +7,7 @@ export class MoviesService {
   constructor(private readonly api: ApiService) {}
 
   async test() {
-    console.log('teest');
+    console.log('requesting...');
     const result = await this.api.movies.findById(297761);
     console.log(result);
   }
