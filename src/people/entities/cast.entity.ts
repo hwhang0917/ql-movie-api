@@ -10,7 +10,7 @@ export class Cast extends CoreEntity {
   credit_id?: string;
 
   @Field((type) => String, { nullable: true })
-  release_dat?: string;
+  release_date?: string;
 
   @Field((type) => Int, { nullable: true })
   vote_count?: number;

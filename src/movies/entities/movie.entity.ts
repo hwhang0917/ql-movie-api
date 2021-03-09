@@ -1,8 +1,13 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
 import { CoreEntity } from 'src/common/entities/core.entity';
+import {
+  Company,
+  Country,
+  Genre,
+  Language,
+} from 'src/common/entities/common.entity';
 import { Video } from 'src/common/entities/video.entity';
 import { Credits } from 'src/people/entities/credits.entity';
-import { Company } from './company.entity';
 
 type Status =
   | 'Rumored'
@@ -11,30 +16,6 @@ type Status =
   | 'Post Production'
   | 'Released'
   | 'Canceled';
-
-@ObjectType()
-class Genre extends CoreEntity {
-  @Field((type) => String)
-  name: string;
-}
-
-@ObjectType()
-class Country {
-  @Field((type) => String)
-  iso_3166_1: string;
-
-  @Field((type) => String)
-  name: string;
-}
-
-@ObjectType()
-class Language {
-  @Field((type) => String)
-  iso_639_1: string;
-
-  @Field((type) => String)
-  name: string;
-}
 
 @ObjectType()
 export class Movie extends CoreEntity {
