@@ -33,3 +33,9 @@ export class Video extends CoreEntity {
   @Field((type) => String, { nullable: true })
   type?: Type;
 }
+
+@ObjectType()
+export class VideoResults {
+  @Field((type) => [Video])
+  results: Video[];
+}

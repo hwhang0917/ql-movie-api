@@ -6,7 +6,7 @@ import {
   Genre,
   Language,
 } from 'src/common/entities/common.entity';
-import { Video } from 'src/common/entities/video.entity';
+import { VideoResults } from 'src/common/entities/video.entity';
 import { Credits } from 'src/people/entities/credits.entity';
 
 type Status =
@@ -79,10 +79,8 @@ export class Movie extends CoreEntity {
   @Field((type) => String, { nullable: true })
   tagline?: string;
 
-  @Field((type) => ({
-    results: [Video],
-  }))
-  videos: { results: Video[] };
+  @Field((type) => VideoResults)
+  videos: VideoResults;
 
   @Field((type) => Int, { nullable: true })
   vote_average?: number;
