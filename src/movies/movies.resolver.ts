@@ -9,17 +9,17 @@ export class MoviesResolver {
   constructor(private readonly movieService: MoviesService) {}
 
   @Query((returns) => MoviesOutput)
-  nowPlaying(): Promise<MoviesOutput> {
+  nowPlayingMovies(): Promise<MoviesOutput> {
     return this.movieService.nowPlaying();
   }
 
   @Query((returns) => MoviesOutput)
-  upcoming(): Promise<MoviesOutput> {
+  upcomingMovies(): Promise<MoviesOutput> {
     return this.movieService.upcoming();
   }
 
   @Query((returns) => MoviesOutput)
-  popular(): Promise<MoviesOutput> {
+  popularMovies(): Promise<MoviesOutput> {
     return this.movieService.popular();
   }
 
