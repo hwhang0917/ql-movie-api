@@ -37,7 +37,7 @@ export class MoviesService {
     try {
       const movie = await this.api.movies.findById(id);
       if (!movie) {
-        return { ok: false, error: 'Movie with that id does not exits' };
+        return { ok: false, error: 'Movie with that id does not exits.' };
       }
       return { ok: true, movie };
     } catch (error) {

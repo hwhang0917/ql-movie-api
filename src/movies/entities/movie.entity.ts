@@ -1,4 +1,4 @@
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, Float, Int, ObjectType } from '@nestjs/graphql';
 import { CoreEntity } from 'src/common/entities/core.entity';
 import {
   Company,
@@ -82,7 +82,7 @@ export class Movie extends CoreEntity {
   @Field((type) => VideoResults)
   videos: VideoResults;
 
-  @Field((type) => Int, { nullable: true })
+  @Field((type) => Float, { nullable: true })
   vote_average?: number;
 
   @Field((type) => Int, { nullable: true })
