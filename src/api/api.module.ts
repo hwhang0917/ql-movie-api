@@ -6,8 +6,9 @@ import {
   Module,
   OnModuleInit,
 } from '@nestjs/common';
-import { blue, green } from 'chalk';
+import { START_TIME_CONFIG } from 'src/common/common.constants';
 import { ApiModuleOptions } from './api.interface';
+import { httpLog } from './api.logger';
 import { ApiService } from './api.service';
 
 @Module({})
@@ -34,41 +35,27 @@ export class ApiModule implements OnModuleInit {
   }
 
   onModuleInit() {
-    const START_TIME = 'request-startTime';
     // Request Interceptor
     this.httpService.axiosRef.interceptors.request.use((config) => {
-      config.headers[START_TIME] = process.hrtime();
-
+      // Set start HRtime to config
+      config.headers[START_TIME_CONFIG] = process.hrtime();
       return config;
     });
 
     // Response Interceptor
     this.httpService.axiosRef.interceptors.response.use((response) => {
-      const { method, url, headers } = response.config;
+      const { config, status, statusText } = response;
+      const { method, url, headers } = config;
+      const startTime = headers[START_TIME_CONFIG];
 
-      // request runtime computation
-      const end = process.hrtime(headers[START_TIME]);
-      const millisecond = Math.round(end[0] * 1000 + end[1] / 1000000);
-      const requestTime = blue(`+${millisecond}ms`);
-
-      // current time computation
-      const date = new Date();
-      const dateString =
-        date.getMonth() < 10
-          ? `0${date.toLocaleDateString()}`
-          : date.toLocaleDateString();
-      const timeString = date.toLocaleTimeString();
-
-      // generate log string
-      const serviceName = blue('[HTTP Service] - ');
-      const currentTime = [dateString, timeString].join(', ');
-      const httpMethod = green.bold(`  [${method.toUpperCase()}]`);
-      const requestUrl = blue(url);
-
-      console.log(
-        serviceName +
-          [currentTime, httpMethod, requestUrl, requestTime].join('\t'),
-      );
+      httpLog({
+        service: 'HTTP Service',
+        method,
+        url,
+        startTime,
+        status,
+        statusText,
+      });
 
       return response;
     });

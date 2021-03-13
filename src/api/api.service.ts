@@ -1,16 +1,22 @@
 import { HttpService, Injectable } from '@nestjs/common';
+import { AxiosError } from 'axios';
+import { START_TIME_CONFIG } from 'src/common/common.constants';
 import { Movie } from 'src/movies/entities/movie.entity';
 import { Person } from 'src/people/entities/person.entity';
 import { Episode } from 'src/shows/entities/episode.entity';
 import { Season } from 'src/shows/entities/season.entity';
 import { Show } from 'src/shows/entities/show.entity';
 import { Parameters } from './api.interface';
+import { httpLog } from './api.logger';
 
 @Injectable()
 export class ApiService {
   constructor(private readonly httpService: HttpService) {}
 
-  private async get<T>(url: string, params?: Parameters): Promise<T> {
+  private async get<Element>(
+    url: string,
+    params?: Parameters,
+  ): Promise<Element> {
     try {
       const { data } = await this.httpService.get(url, { params }).toPromise();
       if (data.results) {
@@ -19,7 +25,19 @@ export class ApiService {
         return data;
       }
     } catch (e) {
-      throw new Error(e);
+      const { config, status, statusText } = (e as AxiosError).response;
+      const { method, url, headers } = config;
+      const startTime = headers[START_TIME_CONFIG];
+      httpLog({
+        service: 'HTTP Service',
+        method,
+        url,
+        startTime,
+        status,
+        statusText,
+      });
+
+      return undefined;
     }
   }
 
