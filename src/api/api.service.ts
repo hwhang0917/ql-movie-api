@@ -62,7 +62,7 @@ export class ApiService {
     ): Promise<Season> =>
       await this.get<Season>(`tv/${showId}/season/${seasonNumber}`),
 
-    findEpisodeDetail: async (
+    getEpisodeDetail: async (
       showId: number,
       seasonNumber: number,
       episodeNumber: number,
