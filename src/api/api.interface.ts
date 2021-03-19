@@ -1,8 +1,8 @@
 export interface ApiModuleOptions {
   apiDomain: string;
   apiKey: string;
-  language: 'ko-KR' | 'en-US';
-  region: 'KR' | 'US';
+  language: string;
+  region: string;
 }
 
 export type Parameters = {

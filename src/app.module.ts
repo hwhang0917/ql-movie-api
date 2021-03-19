@@ -9,6 +9,7 @@ import { CommonModule } from './common/common.module';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ConfigModule } from '@nestjs/config';
 import { ApiModule } from './api/api.module';
+import { ISO3166, ISO639 } from './utils/iso';
 
 @Module({
   imports: [
@@ -18,6 +19,12 @@ import { ApiModule } from './api/api.module';
       validationSchema: Joi.object({
         TMDB_API: Joi.string().required(),
         TMDB_API_KEY: Joi.string().required(),
+        LANGUAGE: Joi.string()
+          .valid(...ISO639)
+          .required(),
+        REGION: Joi.string()
+          .valid(...ISO3166)
+          .required(),
       }),
     }),
     GraphQLModule.forRoot({
@@ -28,8 +35,8 @@ import { ApiModule } from './api/api.module';
     ApiModule.forRoot({
       apiDomain: process.env.TMDB_API,
       apiKey: process.env.TMDB_API_KEY,
-      language: 'ko-KR',
-      region: 'KR',
+      language: process.env.LANGUAGE,
+      region: process.env.REGION,
     }),
     MoviesModule,
     ShowsModule,
