@@ -1,7 +1,6 @@
 import * as Joi from 'joi';
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { MoviesModule } from './movies/movies.module';
 import { ShowsModule } from './shows/shows.module';
 import { PeopleModule } from './people/people.module';
@@ -44,6 +43,6 @@ import { ISO3166, ISO639 } from './utils/iso';
     CommonModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [],
 })
 export class AppModule {}
