@@ -20,7 +20,7 @@ import { ApiModule } from './api/api.module';
         TMDB_API_KEY: Joi.string().required(),
       }),
     }),
-    GraphQLModule.forRoot({ autoSchemaFile: true }),
+    GraphQLModule.forRoot({ autoSchemaFile: true, playground: true }),
     ApiModule.forRoot({
       apiDomain: process.env.TMDB_API,
       apiKey: process.env.TMDB_API_KEY,
