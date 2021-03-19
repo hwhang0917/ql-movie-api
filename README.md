@@ -8,3 +8,7 @@
 
 [![Author](https://img.shields.io/badge/author-hwhang0917-green?style=flat)](https://github.com/hwhang0917/ql-movie-api)
 [![License](https://img.shields.io/github/license/hwhang0917/ql-movie-api)](https://github.com/hwhang0917/ql-movie-api/blob/master/LICENSE)
+
+## Nest Migration and Deployment
+
+Newer versioin migrated to [NestJS](https://nestjs.com/) and [Heroku](https://www.heroku.com/) for deployment. Here's a functioning **[link](https://ql-movie-api.herokuapp.com/graphql)**
