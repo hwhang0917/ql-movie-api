@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ApiService } from 'src/api/api.service';
+import { errorMessage } from 'src/errors/errors';
 import { EpisodeOutput } from './dtos/episode.dto';
 import { SeasonOutput } from './dtos/season.dto';
 import { ShowOutput, ShowsOutput } from './dtos/shows.dto';
@@ -39,7 +40,7 @@ export class ShowsService {
     try {
       const show = await this.api.shows.findById(id);
       if (!show) {
-        return { ok: false, error: 'Show with that id does not exits.' };
+        return { ok: false, error: errorMessage.showNotFound };
       }
       return { ok: true, show };
     } catch (error) {
@@ -59,6 +60,9 @@ export class ShowsService {
   async similarShows(id: number): Promise<ShowsOutput> {
     try {
       const shows = await this.api.shows.findSimilarById(id);
+      if (!shows) {
+        return { ok: false, error: errorMessage.showNotFound };
+      }
       return { ok: true, shows };
     } catch (error) {
       return { ok: false, error };
@@ -70,7 +74,14 @@ export class ShowsService {
     seasonNumber: number,
   ): Promise<SeasonOutput> {
     try {
+      const show = await this.api.shows.findById(showId);
+      if (!show) {
+        return { ok: false, error: errorMessage.showNotFound };
+      }
       const season = await this.api.shows.getSeasonDetail(showId, seasonNumber);
+      if (!season) {
+        return { ok: false, error: errorMessage.seasonNotFound };
+      }
       return { ok: true, season };
     } catch (error) {
       return { ok: false, error };
@@ -83,11 +94,22 @@ export class ShowsService {
     episodeNumber: number,
   ): Promise<EpisodeOutput> {
     try {
+      const show = await this.api.shows.findById(showId);
+      if (!show) {
+        return { ok: false, error: errorMessage.showNotFound };
+      }
+      const season = await this.api.shows.getSeasonDetail(showId, seasonNumber);
+      if (!season) {
+        return { ok: false, error: errorMessage.seasonNotFound };
+      }
       const episode = await this.api.shows.getEpisodeDetail(
         showId,
         seasonNumber,
         episodeNumber,
       );
+      if (!episode) {
+        return { ok: false, error: errorMessage.episodeNotFound };
+      }
       return { ok: true, episode };
     } catch (error) {
       return { ok: false, error };
