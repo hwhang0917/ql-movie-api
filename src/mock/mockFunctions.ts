@@ -1,3 +1,16 @@
+import { ApiService } from 'src/api/api.service';
+
+export type MockApiService = {
+  movies: MockApiMovies;
+  shows: MockApiShows;
+  people: MockApiPeople;
+  search: MockApiSearch;
+};
+type MockApiMovies = Partial<Record<keyof ApiService['movies'], jest.Mock>>;
+type MockApiShows = Partial<Record<keyof ApiService['shows'], jest.Mock>>;
+type MockApiPeople = Partial<Record<keyof ApiService['people'], jest.Mock>>;
+type MockApiSearch = Partial<Record<keyof ApiService['search'], jest.Mock>>;
+
 export const mockApiFunctions = {
   movies: {
     nowPlaying: jest.fn(),
