@@ -19,5 +19,24 @@ jobs:
       - name: Install modules
         run: yarn
 
-      - name: Run unit test
-        run: yarn test
+      - name: Get coverage for badge
+        run: |
+          COV_SUMMARY = "$(yarn test:cov-report | tail -2 | head -1)"
+          TOKENS = ($COV_SUMMARY)
+          echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
+          REF=${{ github.ref }}
+          echo "github.ref: $REF"
+          IFS='/' read -ra PATHS <<< "$REF"
+          BRANCH_NAME="${PATHS[1]}_${PATHS[2]}"
+          echo $BRANCH_NAME
+          echo "BRANCH=$(echo ${BRANCH_NAME})" >> $GITHUB_ENV
+
+      - name: Create line coverage badge
+        uses: schneegans/dynamic-badges-action@v1.0.0
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 16feb82d8fbd22f7ada29e97942b3f1e
+          filename: ql-movie-api__${{ env.BRANCH }}.json
+          label: Test Coverage
+          message: ${{ env.COVERAGE }}
+          color: green
+          namedLogo: jest
