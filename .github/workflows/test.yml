@@ -1,0 +1,23 @@
+name: Unit Test
+
+on: push
+
+jobs:
+  service-unit-test:
+    name: Services Unit Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Setup Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Install modules
+        run: yarn
+
+      - name: Run unit test
+        run: yarn test
