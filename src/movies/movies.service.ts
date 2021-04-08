@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ApiService } from 'src/api/api.service';
+import { errorMessage } from 'src/errors/errors';
 import { MovieOutput, MoviesOutput } from './dtos/movies.dto';
 
 @Injectable()
@@ -37,7 +38,7 @@ export class MoviesService {
     try {
       const movie = await this.api.movies.findById(id);
       if (!movie) {
-        return { ok: false, error: 'Movie with that id does not exits.' };
+        return { ok: false, error: errorMessage.movieNotFound };
       }
       return { ok: true, movie };
     } catch (error) {
@@ -57,6 +58,9 @@ export class MoviesService {
   async similarMovies(id: number): Promise<MoviesOutput> {
     try {
       const movies = await this.api.movies.findSimilarById(id);
+      if (!movies) {
+        return { ok: false, error: errorMessage.movieNotFound };
+      }
       return { ok: true, movies };
     } catch (error) {
       return { ok: false, error };
