@@ -1,7 +1,7 @@
 # This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
 # For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
 
-name: Build Status
+name: Coverage Badge Cretor
 
 on:
   push:
@@ -10,33 +10,20 @@ on:
     branches: [master]
 
 jobs:
-  build:
-    runs-on: ${{ matrix.os }}
-
-    strategy:
-      matrix:
-        os: [ubuntu-latest]
-        node-version: [14.x]
+  service-unit-test:
+    name: Service Unit Test
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v2
-      - name: Use Node.js ${{ matrix.node-version }} on ${{ matrix.os }}
+      - name: Setup Node.js
         uses: actions/setup-node@v1
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: '14'
 
-      # However Node 8.3.0 comes with npm 5.3.0.
-      # npm 5.7.1 is the first version to support npm ci
-      - if: ${{ matrix.node-version == '8.3.0' }}
-        run: npm install -g npm@5.7.1
-      - run: npm ci
-      # ESLint 7.x uses `} catch {` which isn't supported in Node 8
-      - if: ${{ matrix.node-version != '8.3.0' }}
-        run: npm run lint
-      - run: npm t
+        name: Install Modules
+        run: yarn
 
-      # Only run the coverage once
-      - if: ${{ matrix.node-version == '14.x' }}
         name: Get Coverage for badge
         run: |
           # var SUMMARY = [
@@ -51,7 +38,7 @@ jobs:
           # ];
           # SUMMARY = SUMMARY.split('\n')[5]; // 'Lines        : 31.93% ( 38/119 )'
           # SUMMARY = SUMMARY.split(':')[1].split('(')[0].trim(); // '31.93%'
-          SUMMARY="$(npm test -- --coverageReporters='text-summary' | tail -2 | head -1)"
+          SUMMARY="$(yarn test:cov -- --coverageReporters='text-summary' | tail -2 | head -1)"
           TOKENS=($SUMMARY)
           # process.env.COVERAGE = '31.93%';
           echo "COVERAGE=$(echo ${TOKENS[2]})" >> $GITHUB_ENV
