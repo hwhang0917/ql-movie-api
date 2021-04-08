@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ApiService } from 'src/api/api.service';
+import { errorMessage } from 'src/errors/errors';
 import { PeopleOutput, PersonOutput } from './dtos/people.dto';
 
 @Injectable()
@@ -10,7 +11,7 @@ export class PeopleService {
     try {
       const person = await this.api.people.findPersonById(id);
       if (!person) {
-        return { ok: false, error: 'Person with that id does not exists.' };
+        return { ok: false, error: errorMessage.personNotFound };
       }
       return { ok: true, person };
     } catch (error) {
