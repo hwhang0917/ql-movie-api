@@ -2,11 +2,10 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { ApiService } from 'src/api/api.service';
 import { errorMessage } from 'src/errors/errors';
 import { mockApiFunctions, MockApiService } from 'src/mock/mockFunctions';
+import { mockError, mockNotFound } from 'src/mock/mockOutputs';
 import { ShowsService } from './shows.service';
 
 //  Mock IOs
-const mockError = new Error('TEST_ERROR');
-const mockNotFound = null;
 const mockShowId = 0;
 const mockQuery = 'testQuery';
 const mockShow = {
