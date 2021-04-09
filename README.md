@@ -8,6 +8,7 @@
 
 [![Author](https://img.shields.io/badge/author-hwhang0917-green?style=flat)](https://github.com/hwhang0917/ql-movie-api)
 [![License](https://img.shields.io/github/license/hwhang0917/ql-movie-api)](https://github.com/hwhang0917/ql-movie-api/blob/master/LICENSE)
+![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/hwhang0917/16feb82d8fbd22f7ada29e97942b3f1e/raw/4ef3781d1f1177805778217eddc884d5d60e781d/ql-movie-api.json)
 [![Deployment](https://heroku-badge.herokuapp.com/?app=ql-movie-api)](https://ql-movie-api.herokuapp.com/)
 
 ## Nest Migration and Deployment
