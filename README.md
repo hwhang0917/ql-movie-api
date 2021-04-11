@@ -27,7 +27,6 @@ Newer versioin migrated to [NestJS](https://nestjs.com/) and [Heroku](https://ww
     * Language and Region should be set as [ISO-639 (Language)](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and [ISO-3166 (Region)](https://en.wikipedia.org/wiki/ISO_3166-2) respectively
    
    ```.env
-   TMDB_API=https://api.themoviedb.org/3
    TMDB_API_KEY=YOUR TMDB API KEY
    LANGUAGE=ISO-639
    REGION=ISO-3166

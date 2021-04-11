@@ -1,5 +1,4 @@
 export interface ApiModuleOptions {
-  apiDomain: string;
   apiKey: string;
   language: string;
   region: string;

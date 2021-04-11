@@ -16,7 +16,6 @@ import { ISO3166, ISO639 } from './utils/iso';
       isGlobal: true,
       envFilePath: '.env',
       validationSchema: Joi.object({
-        TMDB_API: Joi.string().required(),
         TMDB_API_KEY: Joi.string().required(),
         LANGUAGE: Joi.string()
           .valid(...ISO639)
@@ -32,7 +31,6 @@ import { ISO3166, ISO639 } from './utils/iso';
       introspection: true,
     }),
     ApiModule.forRoot({
-      apiDomain: process.env.TMDB_API,
       apiKey: process.env.TMDB_API_KEY,
       language: process.env.LANGUAGE,
       region: process.env.REGION,

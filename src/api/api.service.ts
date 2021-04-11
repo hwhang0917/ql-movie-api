@@ -1,6 +1,7 @@
-import { HttpService, Injectable } from '@nestjs/common';
+import { HttpService, Injectable, UnauthorizedException } from '@nestjs/common';
 import { AxiosError } from 'axios';
 import { START_TIME_CONFIG } from 'src/common/common.constants';
+import { errorMessage } from 'src/errors/errors';
 import { Movie } from 'src/movies/entities/movie.entity';
 import { Person } from 'src/people/entities/person.entity';
 import { Episode } from 'src/shows/entities/episode.entity';
@@ -25,6 +26,11 @@ export class ApiService {
         return data;
       }
     } catch (e) {
+      if (!e.response) {
+        // No Internet connection
+        console.error(errorMessage.noConnection);
+        throw new Error(errorMessage.noConnection);
+      }
       const { config, status, statusText } = (e as AxiosError).response;
       const { method, url, headers } = config;
       const startTime = headers[START_TIME_CONFIG];
@@ -37,6 +43,14 @@ export class ApiService {
         statusText,
       });
 
+      if (status === 401) {
+        // Invalid API Key Error
+        throw new Error(errorMessage.invalidApiKey);
+      }
+      if (500 <= status) {
+        // TMDB Server Error
+        throw new Error(errorMessage.serverError(statusText));
+      }
       return undefined;
     }
   }

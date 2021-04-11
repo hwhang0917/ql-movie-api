@@ -6,7 +6,10 @@ import {
   Module,
   OnModuleInit,
 } from '@nestjs/common';
-import { START_TIME_CONFIG } from 'src/common/common.constants';
+import {
+  START_TIME_CONFIG,
+  TMDB_API_DOMATIN,
+} from 'src/common/common.constants';
 import { ApiModuleOptions } from './api.interface';
 import { httpLog } from './api.logger';
 import { ApiService } from './api.service';
@@ -21,7 +24,7 @@ export class ApiModule implements OnModuleInit {
       module: ApiModule,
       imports: [
         HttpModule.register({
-          baseURL: options.apiDomain,
+          baseURL: TMDB_API_DOMATIN,
           params: {
             api_key: options.apiKey,
             language: options.language,
