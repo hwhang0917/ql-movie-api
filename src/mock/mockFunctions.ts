@@ -1,3 +1,5 @@
+import { HttpService } from '@nestjs/common';
+import { AxiosRequestConfig } from 'axios';
 import { ApiService } from 'src/api/api.service';
 
 export type MockApiService = {
@@ -11,7 +13,7 @@ type MockApiShows = Partial<Record<keyof ApiService['shows'], jest.Mock>>;
 type MockApiPeople = Partial<Record<keyof ApiService['people'], jest.Mock>>;
 type MockApiSearch = Partial<Record<keyof ApiService['search'], jest.Mock>>;
 
-export const mockApiFunctions = {
+export const mockApiFunctions: MockApiService = {
   movies: {
     nowPlaying: jest.fn(),
     upcoming: jest.fn(),
@@ -29,11 +31,17 @@ export const mockApiFunctions = {
     getEpisodeDetail: jest.fn(),
   },
   people: {
-    findPersonById: jest.fn(),
+    findById: jest.fn(),
   },
   search: {
     movie: jest.fn(),
     show: jest.fn(),
     person: jest.fn(),
   },
+};
+
+export type MockHttpService = Partial<Record<keyof HttpService, jest.Mock>>;
+
+export const mockHttpServiceFunctions = {
+  get: jest.fn(),
 };

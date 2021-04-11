@@ -82,7 +82,8 @@
       ".entity.ts",
       ".constants.ts",
       ".repository.ts",
-      ".logger.ts"
+      ".logger.ts",
+      "errors"
     ]
   }
 }

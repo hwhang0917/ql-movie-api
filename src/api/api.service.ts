@@ -7,6 +7,7 @@ import { Person } from 'src/people/entities/person.entity';
 import { Episode } from 'src/shows/entities/episode.entity';
 import { Season } from 'src/shows/entities/season.entity';
 import { Show } from 'src/shows/entities/show.entity';
+import { endPoints } from './api.endpoints';
 import { Parameters } from './api.interface';
 import { httpLog } from './api.logger';
 
@@ -28,7 +29,7 @@ export class ApiService {
     } catch (e) {
       if (!e.response) {
         // No Internet connection
-        console.log(e.request);
+        console.log(e);
         throw new Error(errorMessage.noConnection);
       }
       const { config, status, statusText } = (e as AxiosError).response;
@@ -56,38 +57,42 @@ export class ApiService {
   }
 
   movies = {
-    nowPlaying: (): Promise<Movie[]> => this.get<Movie[]>('movie/now_playing'),
+    nowPlaying: (): Promise<Movie[]> =>
+      this.get<Movie[]>(endPoints.movies.nowPlaying),
 
-    upcoming: (): Promise<Movie[]> => this.get<Movie[]>('movie/upcoming'),
+    upcoming: (): Promise<Movie[]> =>
+      this.get<Movie[]>(endPoints.movies.upcoming),
 
-    popular: (): Promise<Movie[]> => this.get<Movie[]>('movie/popular'),
+    popular: (): Promise<Movie[]> =>
+      this.get<Movie[]>(endPoints.movies.popular),
 
     findById: (id: number): Promise<Movie> =>
-      this.get<Movie>(`movie/${id}`, {
+      this.get<Movie>(endPoints.movies.findById(id), {
         append_to_response: 'videos,credits',
       }),
 
     findSimilarById: (id: number): Promise<Movie[]> =>
-      this.get<Movie[]>(`movie/${id}/similar`),
+      this.get<Movie[]>(endPoints.movies.findSimilarById(id)),
   };
 
   shows = {
-    topRated: (): Promise<Show[]> => this.get<Show[]>('tv/top_rated'),
+    topRated: (): Promise<Show[]> => this.get<Show[]>(endPoints.shows.topRated),
 
-    popular: (): Promise<Show[]> => this.get<Show[]>('tv/popular'),
+    popular: (): Promise<Show[]> => this.get<Show[]>(endPoints.shows.popular),
 
-    airingToday: (): Promise<Show[]> => this.get<Show[]>('tv/airing_today'),
+    airingToday: (): Promise<Show[]> =>
+      this.get<Show[]>(endPoints.shows.airingToday),
 
     findById: (id: number): Promise<Show> =>
-      this.get<Show>(`tv/${id}`, {
+      this.get<Show>(endPoints.shows.findById(id), {
         append_to_response: 'videos,credits',
       }),
 
     findSimilarById: (id: number): Promise<Show[]> =>
-      this.get<Show[]>(`tv/${id}/similar`),
+      this.get<Show[]>(endPoints.shows.findSimilarById(id)),
 
     getSeasonDetail: (showId: number, seasonNumber: number): Promise<Season> =>
-      this.get<Season>(`tv/${showId}/season/${seasonNumber}`),
+      this.get<Season>(endPoints.shows.getSeasonDetail(showId, seasonNumber)),
 
     getEpisodeDetail: (
       showId: number,
@@ -95,22 +100,23 @@ export class ApiService {
       episodeNumber: number,
     ): Promise<Episode> =>
       this.get<Episode>(
-        `tv/${showId}/season/${seasonNumber}/episode/${episodeNumber}`,
+        endPoints.shows.getEpisodeDetail(showId, seasonNumber, episodeNumber),
       ),
   };
 
   people = {
-    findById: (id: number): Promise<Person> => this.get<Person>(`person/${id}`),
+    findById: (id: number): Promise<Person> =>
+      this.get<Person>(endPoints.people.findById(id)),
   };
 
   search = {
     movie: (query: string): Promise<Movie[]> =>
-      this.get<Movie[]>('search/movie', { query }),
+      this.get<Movie[]>(endPoints.search.movie, { query }),
 
     show: (query: string): Promise<Show[]> =>
-      this.get<Show[]>('search/tv', { query }),
+      this.get<Show[]>(endPoints.search.show, { query }),
 
     person: (query: string): Promise<Person[]> =>
-      this.get<Person[]>('search/person', { query }),
+      this.get<Person[]>(endPoints.search.person, { query }),
   };
 }

@@ -4,9 +4,9 @@ interface LoggerParams {
   service: string;
   method: string;
   url: string;
-  startTime: [number, number];
-  status: number;
-  statusText: string;
+  startTime?: [number, number];
+  status?: number;
+  statusText?: string;
 }
 
 const computeResponseTime = (startTime: [number, number]): number => {
