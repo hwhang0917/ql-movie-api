@@ -6,8 +6,6 @@ name: Coverage Badge Cretor
 on:
   push:
     branches: [master]
-  pull_request:
-    branches: [master]
 
 jobs:
   service-unit-test:
