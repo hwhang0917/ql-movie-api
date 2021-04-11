@@ -9,7 +9,7 @@ export class PeopleService {
 
   async personDetail(id: number): Promise<PersonOutput> {
     try {
-      const person = await this.api.people.findPersonById(id);
+      const person = await this.api.people.findById(id);
       if (!person) {
         return { ok: false, error: errorMessage.personNotFound };
       }

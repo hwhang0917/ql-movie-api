@@ -28,7 +28,7 @@ export class ApiService {
     } catch (e) {
       if (!e.response) {
         // No Internet connection
-        console.error(errorMessage.noConnection);
+        console.log(e.request);
         throw new Error(errorMessage.noConnection);
       }
       const { config, status, statusText } = (e as AxiosError).response;
@@ -100,8 +100,7 @@ export class ApiService {
   };
 
   people = {
-    findPersonById: (id: number): Promise<Person> =>
-      this.get<Person>(`person/${id}`),
+    findById: (id: number): Promise<Person> => this.get<Person>(`person/${id}`),
   };
 
   search = {
