@@ -40,35 +40,29 @@ describe('People Service', () => {
 
   describe('personDetail', () => {
     it('should get person detail.', async () => {
-      apiService.people.findPersonById.mockResolvedValue(mockPerson);
+      apiService.people.findById.mockResolvedValue(mockPerson);
       const result = await service.personDetail(mockPersonId);
 
-      expect(apiService.people.findPersonById).toHaveBeenCalled();
-      expect(apiService.people.findPersonById).toHaveBeenCalledWith(
-        mockPersonId,
-      );
+      expect(apiService.people.findById).toHaveBeenCalled();
+      expect(apiService.people.findById).toHaveBeenCalledWith(mockPersonId);
       expect(result).toEqual({ ok: true, person: mockPerson });
     });
 
     it('should fail if person with id does not exists.', async () => {
-      apiService.people.findPersonById.mockResolvedValue(mockNotFound);
+      apiService.people.findById.mockResolvedValue(mockNotFound);
       const result = await service.personDetail(mockPersonId);
 
-      expect(apiService.people.findPersonById).toHaveBeenCalled();
-      expect(apiService.people.findPersonById).toHaveBeenCalledWith(
-        mockPersonId,
-      );
+      expect(apiService.people.findById).toHaveBeenCalled();
+      expect(apiService.people.findById).toHaveBeenCalledWith(mockPersonId);
       expect(result).toEqual({ ok: false, error: errorMessage.personNotFound });
     });
 
     it('should fail on exception.', async () => {
-      apiService.people.findPersonById.mockRejectedValue(mockError);
+      apiService.people.findById.mockRejectedValue(mockError);
       const result = await service.personDetail(mockPersonId);
 
-      expect(apiService.people.findPersonById).toHaveBeenCalled();
-      expect(apiService.people.findPersonById).toHaveBeenCalledWith(
-        mockPersonId,
-      );
+      expect(apiService.people.findById).toHaveBeenCalled();
+      expect(apiService.people.findById).toHaveBeenCalledWith(mockPersonId);
       expect(result).toEqual({ ok: false, error: mockError });
     });
   });
