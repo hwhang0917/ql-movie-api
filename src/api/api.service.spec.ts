@@ -1,5 +1,7 @@
 import { HttpService } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
+import { AxiosError } from 'axios';
+import { errorMessage } from 'src/errors/errors';
 import {
   MockHttpService,
   mockHttpServiceFunctions,
@@ -50,6 +52,58 @@ describe('Api Service', () => {
 
   it('should be defined.', () => {
     expect(service).toBeDefined();
+  });
+
+  describe('Errors', () => {
+    const mockNoConnectionError = new Error('no-connection');
+    const mockInvalidApiError = {
+      response: { status: 401 },
+    };
+    const mockServerError = {
+      response: { status: 500, statusText: 'serverError' },
+    };
+    const mockResourceNotFoundError = {
+      response: { status: 404 },
+    };
+
+    const NoConnectionError = new Error(errorMessage.noConnection);
+    const InvalidApiKeyError = new Error(errorMessage.invalidApiKey);
+    const ServerError = new Error(
+      errorMessage.serverError(mockServerError.response.statusText),
+    );
+
+    it('should get no connection error.', async () => {
+      mockGetToPromise.toPromise.mockRejectedValue(mockNoConnectionError);
+      try {
+        await service.movies.popular();
+      } catch (error) {
+        expect(error).toEqual(NoConnectionError);
+      }
+    });
+
+    it('should get invalid api key error.', async () => {
+      mockGetToPromise.toPromise.mockRejectedValue(mockInvalidApiError);
+      try {
+        await service.movies.popular();
+      } catch (error) {
+        expect(error).toEqual(InvalidApiKeyError);
+      }
+    });
+
+    it('should get server error.', async () => {
+      mockGetToPromise.toPromise.mockRejectedValue(mockServerError);
+      try {
+        await service.movies.popular();
+      } catch (error) {
+        expect(error).toEqual(ServerError);
+      }
+    });
+
+    it('should return undefined if resource not found.', async () => {
+      mockGetToPromise.toPromise.mockRejectedValue(mockResourceNotFoundError);
+      const result = await service.movies.findById(99999);
+      expect(result).toEqual(undefined);
+    });
   });
 
   describe('Movies', () => {

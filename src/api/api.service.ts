@@ -28,31 +28,37 @@ export class ApiService {
       }
     } catch (e) {
       if (!e.response) {
-        // No Internet connection
-        console.log(e);
+        // Request was made but there was no response
         throw new Error(errorMessage.noConnection);
       }
+
+      // Failed responses
       const { config, status, statusText } = (e as AxiosError).response;
-      const { method, url, headers } = config;
-      const startTime = headers[START_TIME_CONFIG];
-      httpLog({
-        service: 'HTTP Service',
-        method,
-        url,
-        startTime,
-        status,
-        statusText,
-      });
+      if (config) {
+        const { method, url, headers } = config;
+        const startTime = headers[START_TIME_CONFIG];
+        httpLog({
+          service: 'HTTP Service',
+          method,
+          url,
+          startTime,
+          status,
+          statusText,
+        });
+      }
 
       if (status === 401) {
         // Invalid API Key Error
         throw new Error(errorMessage.invalidApiKey);
       }
+      if (status === 404) {
+        // Resource not found error
+        return undefined;
+      }
       if (500 <= status) {
         // TMDB Server Error
         throw new Error(errorMessage.serverError(statusText));
       }
-      return undefined;
     }
   }
 
