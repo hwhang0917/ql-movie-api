@@ -12,5 +12,10 @@ pipeline {
 				sh 'yarn test:cov-summary'
 			}
 		}
+		stage('Building') {
+			steps {
+				sh 'yarn build'
+			}
+		}
 	}
 }
