@@ -2,9 +2,14 @@ pipeline {
 	agent any
 	tools {nodejs "node16.13"}
 	stages {
-		stage('build') {
+		stage('Install Dependencies') {
 			steps {
-				sh 'npm --version'
+				sh 'yarn'
+			}
+		}
+		stage('Running Test') {
+			steps {
+				sh 'yarn test:cov-summary'
 			}
 		}
 	}
