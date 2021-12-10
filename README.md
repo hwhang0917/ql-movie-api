@@ -20,16 +20,20 @@ Newer versioin migrated to [NestJS](https://nestjs.com/) and [Heroku](https://ww
 1. Clone this project to your local directory.
 
 2. Install dependencies using Yarn.
-   
-2. Create a `.env` file in the root directory of this project as following:
 
-    * Getting the Movie Database API Key => [HERE](https://www.themoviedb.org/documentation/api)
-    * Language and Region should be set as [ISO-639 (Language)](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and [ISO-3166 (Region)](https://en.wikipedia.org/wiki/ISO_3166-2) respectively
-   
+3. Create a `.env` file in the root directory of this project as following:
+
+   - Getting the Movie Database API Key => [HERE](https://www.themoviedb.org/documentation/api)
+   - Language and Region should be set as [ISO-639 (Language)](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and [ISO-3166 (Region)](https://en.wikipedia.org/wiki/ISO_3166-2) respectively
+
    ```.env
    TMDB_API_KEY=YOUR TMDB API KEY
    LANGUAGE=ISO-639
    REGION=ISO-3166
    ```
 
-3. Run `yarn start`
+4. Run `yarn start`
+
+## Jenkins
+
+> CI / CD Practice
