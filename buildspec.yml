@@ -1,0 +1,24 @@
+version: 0.2
+
+# Environment Variables
+env:
+  parameter-store:
+    TMDB_API_KEY: "ql-movie-api/TMDB_API_KEY"
+
+# Phase
+phases:
+  install:
+    runtime-versions:
+      nodejs: 20
+    commands:
+      - corepack enable
+      - yarn install
+  pre_build:
+    commans:
+      - yarn test
+  build:
+    commands:
+      - yarn build
+  post_build:
+    commands:
+      - echo "DONE"!
