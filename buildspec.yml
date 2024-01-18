@@ -9,7 +9,7 @@ env:
 phases:
   install:
     runtime-versions:
-      nodejs: 20
+      nodejs: latest
     commands:
       - corepack enable
       - yarn install
