@@ -3,6 +3,6 @@ import { ShowsService } from './shows.service';
 import { ShowsResolver } from './shows.resolver';
 
 @Module({
-  providers: [ShowsService, ShowsResolver]
+  providers: [ShowsService, ShowsResolver],
 })
 export class ShowsModule {}

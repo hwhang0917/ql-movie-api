@@ -11,36 +11,36 @@ import { ApiModule } from './api/api.module';
 import { ISO3166, ISO639 } from './utils/iso';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({
-      isGlobal: true,
-      envFilePath: '.env',
-      validationSchema: Joi.object({
-        TMDB_API_KEY: Joi.string().required(),
-        LANGUAGE: Joi.string()
-          .valid(...ISO639)
-          .required(),
-        REGION: Joi.string()
-          .valid(...ISO3166)
-          .required(),
-      }),
-    }),
-    GraphQLModule.forRoot({
-      autoSchemaFile: true,
-      playground: true,
-      introspection: true,
-    }),
-    ApiModule.forRoot({
-      apiKey: process.env.TMDB_API_KEY,
-      language: process.env.LANGUAGE,
-      region: process.env.REGION,
-    }),
-    MoviesModule,
-    ShowsModule,
-    PeopleModule,
-    CommonModule,
-  ],
-  controllers: [AppController],
-  providers: [],
+    imports: [
+        ConfigModule.forRoot({
+            isGlobal: true,
+            envFilePath: '.env',
+            validationSchema: Joi.object({
+                TMDB_API_KEY: Joi.string().required(),
+                LANGUAGE: Joi.string()
+                    .valid(...ISO639)
+                    .default('EN'),
+                REGION: Joi.string()
+                    .valid(...ISO3166)
+                    .default('US'),
+            }),
+        }),
+        GraphQLModule.forRoot({
+            autoSchemaFile: true,
+            playground: true,
+            introspection: true,
+        }),
+        ApiModule.forRoot({
+            apiKey: process.env.TMDB_API_KEY,
+            language: process.env.LANGUAGE,
+            region: process.env.REGION,
+        }),
+        MoviesModule,
+        ShowsModule,
+        PeopleModule,
+        CommonModule,
+    ],
+    controllers: [AppController],
+    providers: [],
 })
-export class AppModule {}
+export class AppModule { }

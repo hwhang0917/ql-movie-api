@@ -9,33 +9,40 @@
 [![Author](https://img.shields.io/badge/author-hwhang0917-green?style=flat)](https://github.com/hwhang0917/ql-movie-api)
 [![License](https://img.shields.io/github/license/hwhang0917/ql-movie-api)](https://github.com/hwhang0917/ql-movie-api/blob/master/LICENSE)
 ![Coverage Badge](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/hwhang0917/16feb82d8fbd22f7ada29e97942b3f1e/raw/ql-movie-api.json)
-[![Deployment](https://heroku-badge.herokuapp.com/?app=ql-movie-api)](https://ql-movie-api.herokuapp.com/)
 
-## Nest Migration and Deployment
+## Requirements
 
-Newer versioin migrated to [NestJS](https://nestjs.com/) and [Heroku](https://www.heroku.com/) for deployment. Here's a functioning **[link](https://ql-movie-api.herokuapp.com/graphql)**
+* Node.js (v20.11.0)
 
 ## Quick start guide
 
-1. Clone this project to your local directory.
+1. Get the Movie Database API Key from [here](https://www.themoviedb.org/settings/api).
 
-2. Install dependencies using Yarn.
+2. Clone this project to your local directory.
 
-3. Create a `.env` file in the root directory of this project as following:
+3. Install dependencies using [Yarn](http://yarnpkg.com/).
 
-   - Getting the Movie Database API Key => [HERE](https://www.themoviedb.org/documentation/api)
-   - Language and Region should be set as [ISO-639 (Language)](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) and [ISO-3166 (Region)](https://en.wikipedia.org/wiki/ISO_3166-2) respectively
+4. Copy `.env.sample` file as `.env` in the root of this project.
+
+5. Set `.env` as following:
 
    ```.env
-   TMDB_API_KEY=YOUR TMDB API KEY
-   LANGUAGE=ISO-639
-   REGION=ISO-3166
+   TMDB_API_KEY=<YOUR TMDB API KEY>
+   LANGUAGE=<ISO-639 language :: default en>
+   REGION=<ISO-3166 region :: default US>
    ```
 
-4. Run `yarn start`
+6. Run server
 
-## Jenkins
+   ```sh
+   # Run as development mode
+   yarn start:dev
+   # Build server and run production
+   yarn build && yarn start:prod
+   ```
 
-> CI / CD Practice, add testing, building stage
+## Reference
 
-test
+* [How to get TMDB API Key](https://www.themoviedb.org/documentation/api)
+* [ISO-639](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)
+* [ISO-3166](https://en.wikipedia.org/wiki/ISO_3166-1)
