@@ -3,7 +3,7 @@ version: 0.2
 # Environment Variables
 env:
   parameter-store:
-    TMDB_API_KEY: "ql-movie-api/TMDB_API_KEY"
+    TMDB_API_KEY: "/ql-movie-api/TMDB_API_KEY"
 
 # Phase
 phases:
