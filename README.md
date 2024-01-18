@@ -13,6 +13,7 @@
 ## Requirements
 
 * Node.js (v20.11.0)
+* The Movie Database API Key
 
 ## Quick start guide
 
@@ -40,6 +41,24 @@
    # Build server and run production
    yarn build && yarn start:prod
    ```
+
+7. Check if the server is running properly on port `3000`.
+
+## Docker
+
+1. Build docker image.
+
+   ```sh
+   docker built -t <image-name> .
+   ```
+
+2. Run docker container with `.env` file.
+
+   ```sh
+   docker run -d --env-file .env <image-name>
+   ```
+
+3. Check if the server is running properly on port `3000`.
 
 ## Reference
 

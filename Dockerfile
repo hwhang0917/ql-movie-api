@@ -15,5 +15,8 @@ COPY . .
 # Build the app
 RUN yarn build
 
+# Port
+EXPOSE 3000
+
 # Start the server in production mode
 CMD [ "yarn", "start:prod" ]
