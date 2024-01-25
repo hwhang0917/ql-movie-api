@@ -19,7 +19,9 @@
     "test:cov": "jest --coverage",
     "test:cov-summary": "jest --coverage --coverageReporters='text-summary'",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "deploy": "pm2 start ecosystem.config.js --env production",
+    "predeploy": "yarn build"
   },
   "dependencies": {
     "@nestjs/common": "^7.6.13",
@@ -34,6 +36,7 @@
     "graphql": "^15.5.0",
     "graphql-tools": "^7.0.4",
     "joi": "^17.4.0",
+    "pm2": "^5.3.1",
     "reflect-metadata": "^0.1.13",
     "rimraf": "^3.0.2",
     "rxjs": "^6.6.6"
